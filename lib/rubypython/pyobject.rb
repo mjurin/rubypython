@@ -64,12 +64,12 @@ class RubyPython::PyObject # :nodoc: all
     if rObject.kind_of? ::FFI::AutoPointer
       new_pointer = ::FFI::Pointer.new rObject
       @pointer = AutoPyPointer.new new_pointer
-      xIncref
     elsif rObject.kind_of? ::FFI::Pointer
       @pointer = AutoPyPointer.new rObject
     else
       @pointer = AutoPyPointer.new RubyPython::Conversion.rtopObject(rObject)
     end
+    xIncref
     AutoPyPointer.current_pointers[@pointer.object_id] = true
   end
 
